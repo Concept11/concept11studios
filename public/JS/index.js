@@ -1,26 +1,40 @@
 
-$(".fa-bars, .nav-item").click(function(){
-    $(".fa-bars").toggleClass("active")
-    active = $(".fa-bars").hasClass("active")
-    if(active){
-        $('body').css("overflow-y", "hidden")
-        $(".header").css({'height': '100vh', 'transition': 'height .6s'})
-            .addClass("flex-column justify-content-center").removeClass("justify-content-around")
-        $(".main-nav, .contact").addClass("on flex-column align-items-center").removeClass("off").animate({opacity: 1},600).css("margin-bottom", "2rem")
+//change positioning of elements on window width 
+$(window).on("load resize", function(){
+    if($(window).width() < 768){
+        $(".header, .header > ul").addClass("flex-column justify-content-center")
+        $(".header > button").css({'position': 'relative', 'right': 'auto', 'margin-top': '2rem', 'opacity': '0'})
+        $(".header > ul").css({'left': 'auto', 'width': 'auto', 'opacity': '0'})
     }else{
-        $(".contact").css("margin-top", "0")
-        $('body').css("overflow-y", "scroll")
-        $(".header").css({'height': '7rem', 'transition': 'height .6s'})
-            .addClass("justify-content-around").removeClass("flex-column justify-content-center")
-        $(".main-nav, .contact").addClass("off").removeClass("on flex-column align-items-center").animate({opacity: 0},600).css("margin-bottom", "0")
+        $(".header > ul").removeClass("flex-column")
+        $(".header").removeClass("flex-column justify-content-center")
+        $(".header > ul, .header > button").css({'opacity': '1', 'visibility': 'visible', 'display': 'flex', 'transition': 'all .5'})
+        $(".header > button").css({'position': 'absolute','right': '2rem', 'margin-top': '0'})
+        //position header ul at left edge of image and right edge of contact then justify content center
+        //for responsive header ul that is always centered between the button and image
+        var ulWidth = $(".header").outerWidth() - ($(".header > img").outerWidth() + $(".header > button").outerWidth() + 64)
+        var ulLeft = $(".header > img").outerWidth() + 32 //2rem
+        $(".header > ul").css({'width': ulWidth, 'left': ulLeft})
     }
 })
+//animate back up when any link is pressed
+$(".nav-item").click(function(){
+    $(".header").animate({height: '7rem'}, 250, 'linear')
+    $(".header > button, .header > ul").css({'display': 'none', 'visibility': 'hidden'}).animate({opacity: 0})
+})
 
-$(window).resize(function(){
-    if($(window).width() >= 768){
-        $(".main-nav, .contact").addClass("on").removeClass("off").animate({opacity: 1},300)
+//animate changes on hamburger press
+$(".fa-bars").click(function(){
+    $(".fa-bars").toggleClass("active")
+    var active = $(".fa-bars").hasClass("active")
+    if(active){
+        $("body").css("overflow-y", "hidden")
+        $(".header").animate({height: '100vh'},250, 'linear')
+        $(".header > button, .header > ul").css({'display': 'flex', 'visibility': 'visible'}).animate({opacity: 1}, 900)
     }else{
-        $(".main-nav, .contact").addClass("off").removeClass("on").animate({opacity: 0},300)
+        $("body").css("overflow-y", "scroll")
+        $(".header").animate({height: '7rem'}, 250, 'linear')
+        $(".header > button, .header > ul").css({'display': 'none', 'visibility': 'hidden'}).animate({opacity: 0}, 250, 'linear')
     }
 })
 

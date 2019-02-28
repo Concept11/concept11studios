@@ -80,55 +80,41 @@ h6 {
 .header img {
     position: absolute;
     top: 2rem;
-    left: 1rem;
+    left: 2rem;
     display: flex;
     visibility: visible;
 }
-
-.header ul, .contact{
+.header ul{
+    position: relative;
+    left: 2rem;
+}
+.header ul, .header button{
     opacity: 0;
 }
-.header li {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
+.header ul, .header button{
+    display: none;
+    visibility: hidden;
 }
 .header button {
     font-family: 'Work Sans', sans-serif;
     font-size: 20px;
     font-weight: 400;
-    height: 70px;
-    width: 140px;
+    height: 60px;
+    width: 120px;
     color: #FFFFFF;
     background-color: #337ECA;
     border: none;
 }
+.header li {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
 .fa-bars{
     position: absolute;
-    top: 2rem;
+    top: 2.5rem;
     right: 1rem;
-    visibility: visible;
 }
-.mobile-header{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-@media (min-width: 768px){
-    .header img{
-        position: relative;
-        top: 0;
-        left: 0;
-    }
-    .header ul, .contact{
-        display: flex;
-        visibility: visible;
-        opacity: 1;
-    }
-}
-
-
 .main {
     padding-top: 7rem;
     padding-bottom: 7rem;
@@ -138,6 +124,24 @@ h6 {
 #header {
     transition: all 0.4s;
 }
+/* header media breakpoints*/ 
+@media(min-width: 768px){
+    .header button, .header ul{
+        display: flex;
+        visibility: visible;
+    }
+}
+@media(min-width: 1024px){
+    .header li{
+        font-size: 20px;
+    }
+    .header button{
+        height: 70px;
+        width: 140px;
+    }
+}
+
+
 
 #about .square {
     position: relative;
@@ -266,4 +270,10 @@ h6 {
 .off{
     display: none;
     visibility: hidden;
+}
+.mobile-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
